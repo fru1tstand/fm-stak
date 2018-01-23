@@ -15,5 +15,5 @@ abstract class AbstractLayoutController {
    * Called after both the [scene] has been inflated and all controller defined Fxml fields have
    * been instantiated. Use this in place of `@FXML fun initialize()`.
    */
-  open fun onSceneCreate() { }
+  open fun onSceneCreate() {}
 }

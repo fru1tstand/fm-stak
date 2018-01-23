@@ -47,10 +47,12 @@ import java.util.stream.Stream
 abstract class FxApplicationTest : ApplicationTest() {
   @Suppress("MemberVisibilityCanPrivate")
   @TestFactory
-  fun fxTests(): Stream<DynamicTest> = javaClass.methods
-        .filter { it.getAnnotation(FxTest::class.java) != null }
-        .stream()
-        .map { dynamicTest("${it.name}()", { synchronouslyRunTestOnFxThread(it) }) }
+  fun fxTests(): Stream<DynamicTest> =
+    javaClass.methods.filter { it.getAnnotation(FxTest::class.java) != null }.stream().map {
+        dynamicTest(
+          "${it.name}()",
+          { synchronouslyRunTestOnFxThread(it) })
+      }
 
   private fun synchronouslyRunTestOnFxThread(method: Method) {
     val cdl = CountDownLatch(1)
