@@ -4,12 +4,10 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import me.fru1t.fx.annotation.Layout
-import me.fru1t.slik.annotations.Inject
-import me.fru1t.slik.annotations.Singleton
 import kotlin.reflect.KClass
 
 /** Default implementation of [LayoutControllerFactory]. */
-@Inject @Singleton class LayoutControllerFactoryImpl : LayoutControllerFactory {
+class LayoutControllerFactoryImpl : LayoutControllerFactory {
   override fun <T : AbstractLayoutController> create(controllerClass: KClass<T>): T {
     // FxmlResource annotation holds the location of the Fxml resource file
     val controllerAnnotation =
