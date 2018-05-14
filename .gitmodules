@@ -1,0 +1,3 @@
+[submodule "libs/fm-stak-server"]
+	path = libs/fm-stak-server
+	url = git@github.com:fru1tstand/fm-stak-server.git
