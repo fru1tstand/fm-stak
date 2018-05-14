@@ -70,7 +70,7 @@ application.
   + Build - Compiles the project and reports errors  
     `./gradlew clean build`
   + Run - Starts client and server  
-    [to be added]
+    `./gradlew clean run`
   + Test - Runs all unit and integration tests  
     `./gradlew clean test`
 
