@@ -78,9 +78,21 @@ IntelliJ has built-in assistance tools for building, running, testing, and cover
 and ensure you're building unit tests. Coverage does not need to be 100%, but ensure you're making
 your best effort in covering critical paths.
 
-### Stak
+#### IntelliJ Users
+Due to use of Dagger, one needs to enable annotation processing within IntelliJ: 
+`File | Settings | Build, Execution, Deployment | Compiler | Annotation Processors`. Simply check
+the `Enable annotation processing` box and leave all other values at default.
+
+To improve workflow, it's advisable to add the `kaptKotlin` gradle task to the default kotlin
+configuration file within the `Run | Edit Configurations...` panel.
+
+One can also add file watchers to the `StakComponent.kt`, `StakModule.kt`, and `ComponentsModule.kt`
+files to trigger the `kaptKotlin` gradle task on file change.
+
+### Stak Libraries
   + Kotlin - Language of choice
   + Guava - Google's core Java library
   + ControlsFX - JavaFX enhancements (think Bootstrap for JavaFX)
   + JUnit Jupiter (JUnit 5) - Unit testing framework
   + TestFX - Unit testing for JavaFX
+  + Dagger2 - Dependency injection
