@@ -45,6 +45,8 @@ dependencies {
     testCompile group: 'org.testfx', name: 'testfx-core', version: testfx_version
     testCompile group: 'org.testfx', name: 'testfx-junit5', version: testfx_version
 
+    kaptTest "com.google.dagger:dagger-compiler:$dagger_version"
+
     testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junit_jupiter_version
 }
 
@@ -72,6 +74,7 @@ idea {
     module {
         sourceDirs += file('build/generated/source/kapt/main')
         generatedSourceDirs += file('build/generated/source/kapt/main')
+        testSourceDirs += file('build/generated/source/kapt/test')
     }
 }
 
