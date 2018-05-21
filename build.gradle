@@ -35,7 +35,7 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '22.0'
     compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.12'
     compile group: 'com.google.dagger', name: 'dagger', version: dagger_version
-    compile project(':libs/fm-stak-server')
+    compile project(':libs:fm-stak-server')
 
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 

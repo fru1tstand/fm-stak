@@ -96,3 +96,48 @@ files to trigger the `kaptKotlin` gradle task on file change.
   + JUnit Jupiter (JUnit 5) - Unit testing framework
   + TestFX - Unit testing for JavaFX
   + Dagger2 - Dependency injection
+
+### Programming
+#### Project layout
+Most, if not all, of the code that's written will belong in the `components` package. With minor
+exceptions, a class will almost always have an interface to it that's an exact mirror of all the
+public methods within the class. The interface will be called `foo`, where the class itself will be
+called `fooImpl` and belong in the `impl` package just below the interface. We do this to both
+separate implementation from interface, but also allow easier unit testing of other components. As
+components will have other component dependencies, we don't want to instantiate all the other
+dependencies, so we simply mock the interface and happily test the impl with those mocks.
+
+When adding new components, don't forget to add an `@binds` definition within `ComponentsModule`
+of the respective project. For the desktop client, that's `me.fru1t.stak.ComponentsModule` and for
+the server, that's `me.fru1t.stak.server.ComponentsModule`.
+
+#### Unit testing
+There are several types of tests one may need to create.
+  + Normal tests  
+    These tests have no dependency on server or ui elements and purely test code paths. These tests
+    can run on the vanilla JUnit 5 platform with no modifications. Tests should be annotated with
+    `@Test`. See `me.fru1t.stak.server.components.example.impl.ExampleImplTest` and associated
+    files. You can almost always guarantee each test here will be run synchronously, meaning, it's
+    fine to declare a `@BeforeEach` clause in these tests.  
+    + "How do I know my test is a normal test?"  
+      Trust me. You'll know. You won't be fighting anything related to UI or server routing.
+  + Server tests  
+    These tests have dependency on server code (for example, routing). These tests require the ktor
+    testing framework on top of JUnit 5. These tests are annotated the same as normal test `@Test`,
+    but extend the `io.ktor.server.testing.withTestApplication` method and contain a test server
+    routing definition via `application.routing`. See
+    `me.fru1t.stak.server.routing.IndexHandlerTest` and associated files for an example. Much like
+    the normal tests, these tests are almost always run synchronously.  
+    + "How do I know my test is a server test?"
+      Did you add routing? Did you touch a file that has routing? If yes, you'll be making a server
+      test.
+  + JavaFX tests  
+    These are the most annoying tests as they've got many conditions. First, they can be run
+    asynchronously for performance reasons (meaning you cannot have a `@BeforeEach` setup method,
+    and instead must rely on calling a helper method within each test). Second, each test is
+    annotated with `@FxTest` with the test class itself extending
+    `me.fru1t.fx.testing.FxApplicationTest`. This is required as JavaFX must be handled via the main
+    UI thread at all times. The TestFX framework handles this work for us.  
+    + "How do I know my test is a JavaFX test?"
+      If you need to test anything related to UI (using Scenes, Stages, etc) you're making a JavaFX
+      test.

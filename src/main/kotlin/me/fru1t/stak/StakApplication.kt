@@ -9,7 +9,7 @@ import kotlin.concurrent.thread
 
 fun main(args: Array<String>) {
   val serverThread = thread {
-    StakServer.start()
+    StakServer().run()
   }
 
   Application.launch(StakApplication::class.java, *args)

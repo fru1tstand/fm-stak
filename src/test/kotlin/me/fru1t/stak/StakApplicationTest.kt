@@ -6,8 +6,7 @@ import me.fru1t.fx.testing.FxApplicationTest
 import me.fru1t.fx.testing.FxTest
 
 class StakApplicationTest : FxApplicationTest() {
-  @FxTest
-  fun start() {
+  @FxTest fun start() {
     val streamToolsApplication = StakApplication()
     val stage = Stage()
     streamToolsApplication.start(stage)
