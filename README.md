@@ -1,4 +1,6 @@
 # Stak
+[![codecov](https://codecov.io/gh/fru1tstand/fm-stak/branch/master/graph/badge.svg)](https://codecov.io/gh/fru1tstand/fm-stak)  
+
 The task organizer.
 
 ## Features
